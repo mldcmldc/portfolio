@@ -1,113 +1,191 @@
-import Image from 'next/image'
+"use client";
+
+import classNames from "classnames";
+import { Loader2 } from "lucide-react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { raleway } from "./fonts";
+import SkillsSection from "./components/molecules/SkillsSection";
+import SkillsContainer from "./components/molecules/SkillsContainer";
+import ExperienceSection from "./components/molecules/ExperienceSection";
 
 export default function Home() {
+  const letters = "abcdefghijklmnopqrstuvwxyz";
+  const endOutput = "frontend developer";
+
+  function getRandomIndexFromAlphabet() {
+    const alphabetLength = 26;
+
+    return Math.floor(Math.random() * alphabetLength);
+  }
+
+  function generateRandomText(input: string, start: number) {
+    const partial = endOutput.substring(0, start);
+
+    const jumbledLetters = Array.from(input.substring(start)).map(
+      (_) => letters.split("")[getRandomIndexFromAlphabet()]
+    );
+
+    const result = partial + jumbledLetters.join("");
+
+    setTitle(result);
+  }
+
+  function getInitialRandomText() {
+    const jumbledLetters = Array.from(Array(endOutput.length)).map(
+      (_) => letters.split("")[getRandomIndexFromAlphabet()]
+    );
+
+    return jumbledLetters.join("");
+  }
+
+  const [title, setTitle] = useState("");
+
+  useEffect(() => {
+    let index = 0;
+    let result = getInitialRandomText();
+
+    setTimeout(() => {
+      const interval = setInterval(() => {
+        generateRandomText(result, index);
+
+        index += 1;
+
+        if (index == endOutput.length + 1) clearInterval(interval);
+      }, 150);
+    }, 500);
+  }, []);
+
+  const hasTabActive =
+    title == endOutput || title == "Skills" || title == "About me";
+
+  const titleContent = title ? (
+    <p
+      className={classNames(
+        "z-10 text-5xl text-center transition-all duration-1000",
+        {
+          "text-7xl": hasTabActive,
+        }
+      )}
+    >
+      {title}
+    </p>
+  ) : (
+    <div className="text-5xl text-center flex items-center">
+      initializing
+      <Loader2 className="animate-spin ml-5 h-10 w-10" />
+    </div>
+  );
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main>
+      <div className="flex flex-col min-h-screen max-w-screen-md w-full mx-auto relative">
+        <div className="flex fixed left-1/2 -translate-x-1/2 pt-5 flex-col mx-auto w-full bg-black/80 z-50 backdrop-blur-sm">
+          <p className="text-[75px] text-white font-bold text-center">
+            Front-end
+          </p>
+          <p className="text-[75px] text-white font-bold -mt-14 text-center">
+            developer
+          </p>
+
+          <div
+            className={`${raleway.className} flex justify-center items-center font-light space-x-10 mb-4`}
           >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+            <p className="text-white text-center">Skills</p>
+            <p className="text-white text-center">Experience</p>
+            <p className="text-white text-center">About me</p>
+          </div>
         </div>
-      </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+        <SkillsContainer title="skills">
+          <SkillsSection
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea vero repellat ipsa officiis?"
+            header="Front-end"
+          >
+            <Image
+              alt="Next icon"
+              className="bg-white bg-opacity-20 backdrop-blur-lg rounded-2xl p-3 drop-shadow-lg"
+              height={75}
+              width={75}
+              src="/icons/nextjs-icon.svg"
+            />
+            <Image
+              alt="React icon"
+              className="bg-white bg-opacity-20 backdrop-blur-lg rounded-2xl p-3 drop-shadow-lg"
+              height={75}
+              width={75}
+              src="/icons/react.svg"
+            />
+            <Image
+              alt="Typescript icon"
+              className="bg-white bg-opacity-20 backdrop-blur-lg rounded-2xl p-3 drop-shadow-lg"
+              height={75}
+              width={75}
+              src="/icons/typescript-icon.svg"
+            />
+            <Image
+              alt="Tailwind icon"
+              className="bg-white bg-opacity-20 backdrop-blur-lg rounded-2xl p-3 drop-shadow-lg min-h-[75px]"
+              height={75}
+              width={75}
+              src="/icons/tailwindcss-icon.svg"
+            />
+          </SkillsSection>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+          <SkillsSection
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea vero repellat ipsa officiis?"
+            header="Back-end"
+          >
+            <Image
+              alt="Net icon"
+              className="bg-white bg-opacity-20 backdrop-blur-lg rounded-2xl p-3 drop-shadow-lg"
+              height={75}
+              width={75}
+              src="/icons/dotnet.svg"
+            />
+            <Image
+              alt="MySQL icon"
+              className="bg-white bg-opacity-20 backdrop-blur-lg rounded-2xl p-3 drop-shadow-lg min-h-[75px]"
+              height={75}
+              width={75}
+              src="/icons/mysql.svg"
+            />
+          </SkillsSection>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+          <SkillsSection
+            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea vero repellat ipsa officiis?"
+            header="Dev Tools"
+          >
+            <Image
+              alt="Git icon"
+              className="bg-white bg-opacity-20 backdrop-blur-lg rounded-2xl p-3 drop-shadow-lg"
+              height={75}
+              width={75}
+              src="/icons/git-icon.svg"
+            />
+            <Image
+              alt="NPM icon"
+              className="bg-white bg-opacity-20 backdrop-blur-lg rounded-2xl p-3 drop-shadow-lg"
+              height={75}
+              width={75}
+              src="/icons/npm-icon.svg"
+            />
+            <Image
+              alt="Jira icon"
+              className="bg-white bg-opacity-20 backdrop-blur-lg rounded-2xl p-3 drop-shadow-lg"
+              height={75}
+              width={75}
+              src="/icons/jira.svg"
+            />
+          </SkillsSection>
+        </SkillsContainer>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
+        <SkillsContainer className="!mt-32" title="experience">
+          <ExperienceSection />
+        </SkillsContainer>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+        <div className="mb-72" />
       </div>
     </main>
-  )
+  );
 }
