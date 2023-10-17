@@ -10,7 +10,13 @@ type VideoType = {
 };
 
 function Video(props: VideoType) {
-  const { className, content, src, title, titleSize = "text-4xl" } = props;
+  const {
+    className,
+    content,
+    src,
+    title,
+    titleSize = "text-base sm:text-4xl",
+  } = props;
 
   const vidRef = useRef<HTMLVideoElement>(null);
 
@@ -25,9 +31,13 @@ function Video(props: VideoType) {
   return (
     <div className={className}>
       <div className="absolute w-full flex top-1/2 -translate-y-1/2 group-hover:opacity-0 transition-opacity duration-300">
-        <div className="text-gray-300 font-bold bg-black bg-opacity-60 backdrop-blur-sm w-full py-4 px-3 text-left">
-          <p className={titleSize}>{title}</p>
-          <p className={`${raleway.className} leading-4 text-xs`}>{content}</p>
+        <div className="text-gray-300 font-bold bg-black bg-opacity-60 backdrop-blur-sm w-full py-2 sm:py-4 px-3 text-left">
+          <p className={`${titleSize}`}>{title}</p>
+          <p
+            className={`${raleway.className} leading-3 text-[10px] sm:text-sm`}
+          >
+            {content}
+          </p>
         </div>
       </div>
 

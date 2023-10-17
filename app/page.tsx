@@ -79,7 +79,7 @@ export default function Home() {
 
   return (
     <main>
-      <div className="flex flex-col min-h-screen max-w-screen-md w-full mx-auto relative">
+      <div className="flex flex-col min-h-screen max-w-screen-md w-full mx-auto relative px-5">
         <div className="flex fixed left-1/2 -translate-x-1/2 pt-5 flex-col mx-auto w-full bg-black/80 z-50 backdrop-blur-sm">
           <p className="text-[75px] text-white font-bold text-center">
             Front-end
@@ -180,7 +180,7 @@ export default function Home() {
           </SkillsSection>
         </SkillsContainer>
 
-        <SkillsContainer className="!mt-32" title="experience">
+        <SkillsContainer className=" mt-20 !sm:mt-52" title="experience">
           <ExperienceSection />
         </SkillsContainer>
 
