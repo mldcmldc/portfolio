@@ -145,7 +145,7 @@ function ExperienceSection() {
           className="h-full object-contain"
           height={150}
           width={150}
-          src="/icons/sb.png"
+          src="/projects/sb.png"
         />
       </div>
       <div className="col-span-4 font-bold text-center flex flex-col items-center justify-center bg-white bg-opacity-5 backdrop-blur-sm">
