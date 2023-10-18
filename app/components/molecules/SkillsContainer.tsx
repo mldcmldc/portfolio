@@ -13,14 +13,15 @@ function SkillsContainer(props: SkillsContainerType) {
 
   return (
     <div
-      className={`${classNames(
-        className,
-        "flex flex-col space-y-5 mt-80 relative"
-      )}`}
+      className={`${classNames(className, "flex flex-col space-y-5 relative")}`}
     >
-      <div className="text-4xl sm:text-[120px] h-full w-full text-white opacity-30 sticky top-1/3 -translate-y-8">
-        <p className={`${raleway.className} font-extralight tracking-widest`}>
+      <div className="text-4xl sm:text-[100px] h-full w-full text-white opacity-30 sticky top-1/3 -translate-y-8">
+        <p
+          className={`${raleway.className} font-extralight tracking-widest animate-pulse`}
+        >
+          <span className="text-gray-500">&lt;</span>
           {title}
+          <span className="text-gray-500">/&gt;</span>
         </p>
       </div>
       {children}

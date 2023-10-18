@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Eye, Gem, Microscope, Shirt, Store } from "lucide-react";
 import { raleway } from "@/app/fonts";
 import Video from "../organisms/Video";
 import Link from "next/link";
@@ -38,7 +39,7 @@ function ExperienceSection() {
         >
           <Video
             className="relative group"
-            content="Built pages and optimzed video assets"
+            icon={<Eye />}
             src="/videos/boffi.mov"
             title="Multiple Brand Sites"
           />
@@ -70,29 +71,29 @@ function ExperienceSection() {
 
       <Link
         passHref
-        className="col-span-2"
-        href="https://rewards.focusglobalinc.com/"
-      >
-        <Video
-          className="relative group h-full"
-          content="Built dynamic pages and integrated back-end"
-          src="/videos/rewards.mov"
-          title="Rewards"
-          titleSize="sm:text-2xl"
-        />
-      </Link>
-
-      <Link
-        passHref
         className="col-span-3"
         href="https://alifeinfocus.ph/products"
       >
         <Video
           className="relative group h-full"
-          content="Built dynamic pages, optimized load time, integrated payment end-points"
+          icon={<Store />}
           title="E-commerce"
           titleSize="sm:text-2xl"
           src="/videos/alif.mov"
+        />
+      </Link>
+
+      <Link
+        passHref
+        className="col-span-2"
+        href="https://rewards.focusglobalinc.com/"
+      >
+        <Video
+          className="relative group h-full"
+          icon={<Gem />}
+          src="/videos/rewards.mov"
+          title="Rewards"
+          titleSize="sm:text-2xl"
         />
       </Link>
 
@@ -103,22 +104,9 @@ function ExperienceSection() {
       >
         <Video
           className="relative group h-full"
-          content="Built static pages and integrated basic animation"
+          icon={<Microscope />}
           title="Microsite"
           src="/videos/szwf-spc.mov"
-        />
-      </Link>
-
-      <Link
-        passHref
-        className="col-span-3"
-        href="https://products.miele-philippines.com/products/CoffeeMachines"
-      >
-        <Video
-          className="relative group h-full"
-          content="Built dynamic pages in preparation of E-commerce Site"
-          title="Products"
-          src="/videos/miele.mov"
         />
       </Link>
 
@@ -129,10 +117,23 @@ function ExperienceSection() {
       >
         <Video
           className="relative group h-full"
-          content="Transformed WordPress site into NextJS"
+          icon={<Eye />}
           title="Brand Site"
           titleSize="sm:text-2xl"
           src="/videos/szwf.mov"
+        />
+      </Link>
+
+      <Link
+        passHref
+        className="col-span-3"
+        href="https://products.miele-philippines.com/products/CoffeeMachines"
+      >
+        <Video
+          className="relative group h-full"
+          icon={<Shirt />}
+          title="Products"
+          src="/videos/miele.mov"
         />
       </Link>
 

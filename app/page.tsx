@@ -1,82 +1,10 @@
-"use client";
-
-import classNames from "classnames";
-import { Loader2 } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import { raleway } from "./fonts";
 import SkillsSection from "./components/molecules/SkillsSection";
 import SkillsContainer from "./components/molecules/SkillsContainer";
 import ExperienceSection from "./components/molecules/ExperienceSection";
 
 export default function Home() {
-  const letters = "abcdefghijklmnopqrstuvwxyz";
-  const endOutput = "frontend developer";
-
-  function getRandomIndexFromAlphabet() {
-    const alphabetLength = 26;
-
-    return Math.floor(Math.random() * alphabetLength);
-  }
-
-  function generateRandomText(input: string, start: number) {
-    const partial = endOutput.substring(0, start);
-
-    const jumbledLetters = Array.from(input.substring(start)).map(
-      (_) => letters.split("")[getRandomIndexFromAlphabet()]
-    );
-
-    const result = partial + jumbledLetters.join("");
-
-    setTitle(result);
-  }
-
-  function getInitialRandomText() {
-    const jumbledLetters = Array.from(Array(endOutput.length)).map(
-      (_) => letters.split("")[getRandomIndexFromAlphabet()]
-    );
-
-    return jumbledLetters.join("");
-  }
-
-  const [title, setTitle] = useState("");
-
-  useEffect(() => {
-    let index = 0;
-    let result = getInitialRandomText();
-
-    setTimeout(() => {
-      const interval = setInterval(() => {
-        generateRandomText(result, index);
-
-        index += 1;
-
-        if (index == endOutput.length + 1) clearInterval(interval);
-      }, 150);
-    }, 500);
-  }, []);
-
-  const hasTabActive =
-    title == endOutput || title == "Skills" || title == "About me";
-
-  const titleContent = title ? (
-    <p
-      className={classNames(
-        "z-10 text-5xl text-center transition-all duration-1000",
-        {
-          "text-7xl": hasTabActive,
-        }
-      )}
-    >
-      {title}
-    </p>
-  ) : (
-    <div className="text-5xl text-center flex items-center">
-      initializing
-      <Loader2 className="animate-spin ml-5 h-10 w-10" />
-    </div>
-  );
-
   return (
     <main>
       <div className="flex flex-col min-h-screen max-w-screen-md w-full mx-auto relative px-5">
@@ -95,11 +23,15 @@ export default function Home() {
             <p className="text-white text-center">Experience</p>
             <p className="text-white text-center">About me</p>
           </div>
+
+          <p className="text-red-600 text-sm absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 border-2 p-2 border-red-600 bg-white/80 animate-pulse">
+            IN PROGRESS
+          </p>
         </div>
 
-        <SkillsContainer title="skills">
+        <SkillsContainer className="mt-80" title="skills">
           <SkillsSection
-            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea vero repellat ipsa officiis?"
+            content="Developed over six (6) web applications over the past 2 years"
             header="Front-end"
           >
             <Image
@@ -133,7 +65,7 @@ export default function Home() {
           </SkillsSection>
 
           <SkillsSection
-            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea vero repellat ipsa officiis?"
+            content="Currently maintaining a set of internal systems"
             header="Back-end"
           >
             <Image
@@ -153,7 +85,7 @@ export default function Home() {
           </SkillsSection>
 
           <SkillsSection
-            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea vero repellat ipsa officiis?"
+            content="Proficiency in version control and experience in creating packages"
             header="Dev Tools"
           >
             <Image
@@ -180,11 +112,11 @@ export default function Home() {
           </SkillsSection>
         </SkillsContainer>
 
-        <SkillsContainer className=" mt-20 !sm:mt-52" title="experience">
+        <SkillsContainer className="mt-20 sm:mt-52" title="experience">
           <ExperienceSection />
         </SkillsContainer>
 
-        <div className="mb-72" />
+        <div className="mb-10" />
       </div>
     </main>
   );
