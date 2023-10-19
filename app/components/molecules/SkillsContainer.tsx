@@ -28,4 +28,6 @@ const SkillsContainer = forwardRef<HTMLDivElement, SkillsContainerType>(
   )
 );
 
+SkillsContainer.displayName = "SkillsContainer";
+
 export default SkillsContainer;
