@@ -1,6 +1,6 @@
 import { raleway } from "@/app/fonts";
 import classNames from "classnames";
-import { ReactNode } from "react";
+import { ReactNode, forwardRef } from "react";
 
 type SkillsContainerType = {
   className?: string;
@@ -8,12 +8,11 @@ type SkillsContainerType = {
   title: string;
 };
 
-function SkillsContainer(props: SkillsContainerType) {
-  const { className, children, title } = props;
-
-  return (
+const SkillsContainer = forwardRef<HTMLDivElement, SkillsContainerType>(
+  ({ className, children, title }, ref) => (
     <div
       className={`${classNames(className, "flex flex-col space-y-5 relative")}`}
+      ref={ref}
     >
       <div className="text-4xl sm:text-[100px] h-full w-full text-white opacity-30 sticky top-1/3 -translate-y-8">
         <p
@@ -26,7 +25,7 @@ function SkillsContainer(props: SkillsContainerType) {
       </div>
       {children}
     </div>
-  );
-}
+  )
+);
 
 export default SkillsContainer;
