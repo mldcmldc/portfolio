@@ -27,7 +27,7 @@ function ExperienceSection() {
           className="max-h-32 w-fit"
           height={200}
           width={200}
-          src="/icons/technocore.jpeg"
+          src="/projects/technocore.jpeg"
         />
       </div>
 
@@ -145,7 +145,7 @@ function ExperienceSection() {
           className="h-full object-contain"
           height={150}
           width={150}
-          src="/projects/sb.png"
+          src="/icons/sb.png"
         />
       </div>
       <div className="col-span-4 font-bold text-center flex flex-col items-center justify-center bg-white bg-opacity-5 backdrop-blur-sm">
