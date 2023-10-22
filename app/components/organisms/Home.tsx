@@ -7,6 +7,8 @@ import SkillsContainer from "../molecules/SkillsContainer";
 import SkillsSection from "../molecules/SkillsSection";
 import { RefObject, useRef } from "react";
 
+import AboutMeSection from "../molecules/AboutMeSection";
+
 function Home() {
   const skillsSectionRef = useRef<HTMLDivElement>(null);
   const experienceSectionRef = useRef<HTMLDivElement>(null);
@@ -143,6 +145,14 @@ function Home() {
         ref={experienceSectionRef}
       >
         <ExperienceSection />
+      </SkillsContainer>
+
+      <SkillsContainer
+        className="mt-20 sm:mt-40"
+        title="about me"
+        ref={experienceSectionRef}
+      >
+        <AboutMeSection />
       </SkillsContainer>
 
       <div className="mb-10" />
