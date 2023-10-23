@@ -150,7 +150,7 @@ function Home() {
       <SkillsContainer
         className="mt-20 sm:mt-40"
         title="about me"
-        ref={experienceSectionRef}
+        ref={aboutMeSectionRef}
       >
         <AboutMeSection />
       </SkillsContainer>
